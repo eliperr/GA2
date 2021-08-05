@@ -11,11 +11,18 @@ package ga2;
  */
 public class Multiblaster 
 {
+    public static final int num_threads = 4;
+    
+    private static Multiblaster active;
+    
     private CallBlast[] blasters;
     
     public Multiblaster(int len)
     {
+        active = this;
         blasters = new CallBlast[len];
+        
+        
         
         for(int i = 0; i < len; i++)
         {
@@ -23,12 +30,36 @@ public class Multiblaster
         }
     }
     
+    
+    public static void end()
+    {
+        active.endHelp();
+        active = null;
+    }
+    
+    private void endHelp()
+    {
+        for(CallBlast c : blasters)
+        {
+            c.end();
+        }
+    }
+    
     // 1 2 chrome windows
     // a b c d e f g genes
     // 1 2 1 2 1 2 1
     
-    public void blastAll(Gene[] genes)
+    public static void blastAll(Gene[] genes)
     {
+        if(active == null)
+        {
+            active = new Multiblaster(num_threads);
+        }
+        active.blastAllHelp(genes);
+    }
+    private void blastAllHelp(Gene[] genes)
+    {
+        
         BlasterThread[] run = new BlasterThread[blasters.length];
         
         

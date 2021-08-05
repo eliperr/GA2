@@ -15,20 +15,18 @@ public class Test {
     
      public static void main(String[] args) 
     {
-        Gene[] test = new Gene[10];
+        Population test = new Population(10, 3135);
+        test.setIdentities();
+        test.printThePeople();
         
-        for(int i = 0; i < test.length; i++)
+        for(int i = 0; i < 9; i++)
         {
-            test[i] = new Gene(3135);
+            System.out.println("***** GENERATION "+i);
+            test.nextGen(1);
+            test.printThePeople();
         }
         
-        Multiblaster multi = new Multiblaster(4);
-        multi.blastAll(test);
-        
-        for(int i = 0; i < test.length; i++)
-        {
-            System.out.println(test[i].getAASeq()+" "+test[i].getIdentity());
-        }
+        Multiblaster.end();
         
         
         /*

@@ -9,6 +9,18 @@ public class CallBlast
 {
     private WebDriver driver;
     
+    public CallBlast()
+    {
+ 
+        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+        driver = new ChromeDriver();
+    }
+    
+    public void end()
+    {
+        driver.quit();
+    }
+    
     public double blast(String aaseq)
     {
         if(aaseq.length() == 0)
@@ -16,12 +28,11 @@ public class CallBlast
             return 0;
         }
         
-        System.setProperty("webdriver.chrome.driver","C:\\Program Files\\Selenium\\chromedriver.exe");
         
-        if(driver == null)
-        {
-            driver = new ChromeDriver();
-        }
+        
+        //System.setProperty("webdriver.chrome.driver","C:\\Program Files\\Selenium\\chromedriver.exe");
+        
+        
             
             driver.get("https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE=Proteins&PROGRAM=blastp&BLAST_PROGRAMS=blastp&PAGE_TYPE=BlastSearch&BLAST_SPEC=blast2seq&DATABASE=n/a&QUERY=&SUBJECTS=");
             
@@ -58,8 +69,15 @@ public class CallBlast
               
        seq2.submit();
        
-       for(int x = 0; x < 10; x++)
+       boolean found = false;
+       
+       for(int x = 0; x < 6; x++)
        {
+           if(found)
+           {
+               break;
+           }
+           
             try
             {
              Thread.sleep(500);
@@ -75,6 +93,9 @@ public class CallBlast
             //System.out.println(table);
             try
             {
+                //WebElement testElement = driver.findElement(By.id("ui-nciexternallink-4"));
+                
+                //found = true;
                  WebElement id = driver.findElement(By.xpath("//*[@id=\"ui-ncbipopper-5\"]"));
                  String i = id.getAttribute("seqid");
 

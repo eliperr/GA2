@@ -29,6 +29,11 @@ public class  Gene {
         identity = blaster.blast(aaseq);
     }
     
+    public void setIdentity(double d)
+    {
+        identity = d;
+    }
+    
     public Gene(int len)
     {
         this(randomGene(len));
@@ -81,7 +86,7 @@ public class  Gene {
         
         int location = (int)(Math.random() * ( s1.length()/2.0 + s2.length()/2.0));
         
-        System.out.println("crossover at "+location);
+        //System.out.println("crossover at "+location);
         String output = s1.substring(0, location) + s2.substring(location);
         
     
