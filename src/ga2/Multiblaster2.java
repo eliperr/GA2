@@ -30,7 +30,16 @@ public class Multiblaster2
     public Multiblaster2(int len)
     {
         active = this;
-        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+        
+        if(System.getProperty("os.name").toLowerCase().indexOf("windows")>=0)
+        {
+            System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+        }
+        else if(System.getProperty("os.name").toLowerCase().indexOf("mac")>=0)
+        {
+            System.setProperty("webdriver.chrome.driver", "chromedriver");
+        }
+        
         driver = new ChromeDriver();
         
         for(int i = 0; i < num_threads; i++)

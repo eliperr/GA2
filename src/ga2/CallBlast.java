@@ -12,7 +12,14 @@ public class CallBlast
     public CallBlast()
     {
  
-        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+        if(System.getProperty("os.name").toLowerCase().indexOf("windows")>=0)
+        {
+            System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+        }
+        else if(System.getProperty("os.name").toLowerCase().indexOf("mac")>=0)
+        {
+            System.setProperty("webdriver.chrome.driver", "chromedriver");
+        }
         driver = new ChromeDriver();
     }
     
