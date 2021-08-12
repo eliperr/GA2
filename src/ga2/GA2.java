@@ -17,6 +17,16 @@ PKSPLACTNKRPRPEGMQTLESFFKPLTH /*/
 import java.io.File;
 import java.io.PrintStream;
 import java.util.Scanner;
+import org.biojava.nbio.alignment.Alignments;
+import org.biojava.nbio.alignment.Alignments.PairwiseSequenceAlignerType;
+import org.biojava.nbio.alignment.SimpleGapPenalty;
+import org.biojava.nbio.alignment.template.GapPenalty;
+import org.biojava.nbio.alignment.template.PairwiseSequenceAligner;
+import org.biojava.nbio.core.alignment.matrices.SubstitutionMatrixHelper;
+import org.biojava.nbio.core.alignment.template.SequencePair;
+import org.biojava.nbio.core.alignment.template.SubstitutionMatrix;
+import org.biojava.nbio.core.sequence.ProteinSequence;
+import org.biojava.nbio.core.sequence.compound.AminoAcidCompound;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.By;
@@ -27,7 +37,33 @@ public class GA2  {
 
     public static void main(String[] args) throws Exception 
     {
-         Test.main(args);
+        Test.main(args);
+        
+        /*
+        ProteinSequence s1 = new ProteinSequence("VEVMEIMSRFAVBCIERASIDEAYVD");
+        ProteinSequence s2 = new ProteinSequence(CallBlast.target);
+        
+        SubstitutionMatrix<AminoAcidCompound> matrix = SubstitutionMatrixHelper.getBlosum65();
+
+		GapPenalty penalty = new SimpleGapPenalty();
+
+		int gop = 8;
+		int extend = 1;
+		penalty.setOpenPenalty(gop);
+		penalty.setExtensionPenalty(extend);
+
+
+		PairwiseSequenceAligner<ProteinSequence, AminoAcidCompound> smithWaterman =
+				Alignments.getPairwiseAligner(s1, s2, PairwiseSequenceAlignerType.LOCAL, penalty, matrix);
+
+		SequencePair<ProteinSequence, AminoAcidCompound> pair = smithWaterman.getPair();
+
+                
+                System.out.println(pair.getPercentageOfIdentity(true));
+		//System.out.println(pair.toString(60));
+             */   
+                
+         //Test.main(args);
          //System.exit(0); 
         
          /*

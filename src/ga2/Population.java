@@ -44,7 +44,7 @@ public class Population {
      public void setIdentities()
      {
       
-        Multiblaster.blastAll(people);
+        BioJavaWrapper.blastAll(people);
      }
     
      public Gene[] getGene()

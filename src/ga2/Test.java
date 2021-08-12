@@ -26,7 +26,7 @@ public class Test {
             test.printThePeople();
         }
         
-        Multiblaster.end();
+  
         
         
         /*
