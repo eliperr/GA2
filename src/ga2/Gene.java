@@ -9,7 +9,10 @@ package ga2;
  *
  * @author Michael & Eli
  */
-public class  Gene {
+
+public class  Gene implements Comparable <Gene> {
+    
+
     
     private String codingStrand;
     private String aaseq;
@@ -54,7 +57,24 @@ public class  Gene {
         return codingStrand;
     }
   
-    
+    public int compareTo(Gene g)
+    {
+        if (identity<g.getIdentity())    //sort parents high to low, pick highest
+        {
+            return 1; 
+        }   
+        
+        else if (identity>g.getIdentity())
+        {
+            return -1; 
+        } 
+        
+        else 
+        {
+            return 0; 
+        }
+            
+    }
     public static String randomGene(int length)
     {  String gene="";
       for (int i = 0; i <length; i++)

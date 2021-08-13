@@ -6,6 +6,7 @@
 package ga2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -91,25 +92,33 @@ public class Population {
      //star trek class TNG 
      
      
-   public void nextGen( double mutRate )
+   public void nextGen( double mutRate, int selectNum )
     {
-          Gene[] children = new Gene[people.length];
-           for (int i=0; i<people.length; i=i+2)
+           Arrays.sort(people); 
+           Gene[]half= new Gene[people.length/selectNum];
+           
+            printThePeople();
+            
+        
+        Gene[] children = new Gene[ (int) Math.floor(people.length/2/selectNum ) *selectNum *2];
+           for (int i=0; i<(Math.floor(people.length/selectNum)-1); i=i+2)  //start with selectNum=2 ---> take best half of parents
            {
-              Gene p1=  people[i];
+            
+            for (int j=0; j<selectNum*2; j++)  //should be 4 children or 2X parents selected
+             {    
+               Gene p1=  people[i];
               Gene p2=  people[i+1];
+            
               String mutp1=Gene.ptMut(p1,mutRate);
               String mutp2=Gene.ptMut(p2,mutRate);
               String child=Gene.crossover(mutp1, mutp2);
                 Gene kid=new Gene(child);
-               children[i]=kid;
-            
-                mutp1=Gene.ptMut(p1,mutRate);
-                mutp2=Gene.ptMut(p2,mutRate);
-               child=Gene.crossover(mutp1, mutp2);
-                kid=new Gene(child);
-               children[i+1]=kid;   
-               
+                
+               // System.out.println("i is " + i + " j is " + j);
+               children[i*selectNum+j]=kid;
+              
+                 
+               } 
                
            }    
                

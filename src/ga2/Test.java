@@ -17,13 +17,13 @@ public class Test {
     {
         Population test = new Population(10, 3135);
         test.setIdentities();
-        test.printThePeople();
+        //test.printThePeople();
         
         for(int i = 0; i < 9; i++)
         {
             System.out.println("***** GENERATION "+i);
-            test.nextGen(1);
-            test.printThePeople();
+            test.nextGen(1,2);  //1 is mutation rate, 2 is selectNum 
+            //test.printThePeople();
         }
         
   
