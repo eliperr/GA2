@@ -15,7 +15,7 @@ public class Test {
     
      public static void main(String[] args) 
     {
-        Population test = new Population(10, 3135);
+       Population test = new Population(10, 3135);
         test.setIdentities();
         //test.printThePeople();
         
@@ -23,11 +23,16 @@ public class Test {
         {
             System.out.println("***** GENERATION "+i);
             test.nextGen(1,2);  //1 is mutation rate, 2 is selectNum 
-            //test.printThePeople();
+            test.printThePeople();
         }
         
   
         
+        /*Gene g=new Gene (10); 
+        System.out.println(g.getCodingStrand());   
+        String val=Gene.insertion(g,1,5);             //valine 
+         System.out.println(val);       
+        */
         
         /*
         System.exit(0);
