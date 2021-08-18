@@ -14,8 +14,8 @@ public class Test {
     
     
      public static void main(String[] args) 
-    {
-       Population test = new Population(10, 3135);
+    {   //main method: test generations having children
+        Population test = new Population(10, 3135);
         test.setIdentities();
         //test.printThePeople();
         
@@ -26,11 +26,18 @@ public class Test {
             test.printThePeople();
         }
         
-  
+    
         
-        /*Gene g=new Gene (10); 
+         /*double mutRate=1.9;
+        int mut= (int) Math.floor(mutRate); 
+        if (Math.random() <= mutRate-mut)
+        { mut++; }    
+        System.out.println(mut); */
+        
+        //test mutation types
+        /*Gene g=new Gene (5); 
         System.out.println(g.getCodingStrand());   
-        String val=Gene.insertion(g,1,5);             //valine 
+        String val=Gene.dup(g,1.5,2);             //valine 
          System.out.println(val);       
         */
         
