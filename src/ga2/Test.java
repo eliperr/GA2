@@ -23,7 +23,7 @@ public class Test {
         {
             System.out.println("***** GENERATION "+i);
             test.nextGen(1,2);  //1 is mutation rate, 2 is selectNum 
-            test.printThePeople();
+            test.printTheBestPerson();
         }
         
     

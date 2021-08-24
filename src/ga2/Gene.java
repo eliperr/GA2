@@ -146,9 +146,9 @@ public class  Gene implements Comparable <Gene> {
     }
     
     //duplicate a small section of DNA of random size up to maxDupSize
- public static String dup (Gene g1, double mutationRate, int maxDupSize)  //make sure maxDupSize less than= length gene!
+ public static String dup (String s1, double mutationRate, int maxDupSize)  //make sure maxDupSize less than= length gene!
     {
-        String s1 = g1.getCodingStrand();
+       
         if (maxDupSize>s1.length())
         {
             maxDupSize=s1.length();  //don't make dup size more than or equal to gene!
@@ -169,12 +169,11 @@ public class  Gene implements Comparable <Gene> {
        return s1;
     }
          //delete a small section of DNA of random size up to maxDelSize
-  public static String del (Gene g1, double mutationRate, int maxDelSize)  
+  public static String del (String s1, double mutationRate, int maxDelSize)  
     {
         
        
-        
-        String s1 = g1.getCodingStrand();
+       
         if (maxDelSize>s1.length())
         {
             maxDelSize=s1.length();  //don't make deletion size more than or equal to gene!
@@ -195,9 +194,9 @@ public class  Gene implements Comparable <Gene> {
        return s1;
     }
      //insertion random sequence of nucleotides at most maxInsertSize
-   public static String insertion (Gene g1, double mutationRate, int maxInsertSize)  
+   public static String insertion (String s1, double mutationRate, int maxInsertSize)  
     {
-        String s1 = g1.getCodingStrand();
+       
        int mutNum=decideMutNum (mutationRate);
     
         for (int i=0; i<mutNum; i++)

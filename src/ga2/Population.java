@@ -71,6 +71,19 @@ public class Population {
              
              
      }  
+      
+      public void printTheBestPerson ( ) 
+      {
+          
+        Arrays.sort(people);
+        
+           System.out.println(people[0].getAASeq());
+         System.out.println(people[0].getIdentity());
+          
+        
+          
+      }          
+              
      
    public  List<Gene> chooseParents()
    { 
@@ -97,7 +110,8 @@ public class Population {
            Arrays.sort(people); 
            Gene[]half= new Gene[people.length/selectNum];
            
-            printThePeople();
+            //printThePeople();
+            
             
         
         Gene[] children = new Gene[ (int) Math.floor(people.length/2/selectNum ) *selectNum *2];
@@ -111,6 +125,13 @@ public class Population {
             
               String mutp1=Gene.ptMut(p1,mutRate);
               String mutp2=Gene.ptMut(p2,mutRate);
+               mutp1=Gene.del(mutp1,mutRate,1);
+              mutp2=Gene.del(mutp2,mutRate,1);
+              mutp1=Gene.dup(mutp1,mutRate,1);
+              mutp2=Gene.dup(mutp2,mutRate,1);
+              mutp1=Gene.insertion(mutp1,mutRate,1);
+              mutp2=Gene.insertion(mutp2,mutRate,1);
+              
               String child=Gene.crossover(mutp1, mutp2);
                 Gene kid=new Gene(child);
                 
@@ -128,5 +149,6 @@ public class Population {
           
           people = children;
           setIdentities();
+           Arrays.sort(people);
     }  
 }
