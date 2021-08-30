@@ -15,14 +15,17 @@ public class Test {
     
      public static void main(String[] args) 
     {   //main method: test generations having children
-        Population test = new Population(20, 3135);
+        //Population test = new Population(20, 3135);
+        Population test = new Population(100, 5000);
         test.setIdentities();
         //test.printThePeople();
         
-        for(int i = 0; i < 100; i++)
+        for(int i = 0; i < 500; i++)
         {
             System.out.println("***** GENERATION "+i);
-            test.nextGen(1,2);  //1 is mutation rate, 2 is selectNum 
+            //test.nextGenPartialReplace(1,2);  //1 is mutation rate, 2 is selectNum 
+            test.nextGen(1, 2);
+            //test.replaceWorst(1, 2);
             test.printTheBestPerson();
         }
         

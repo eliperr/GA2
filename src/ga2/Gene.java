@@ -24,7 +24,7 @@ public class  Gene implements Comparable <Gene> {
     {
         this.codingStrand = coding;
         aaseq = Translate.translate(codingStrand);
-        
+        identity = BioJavaWrapper.blast(aaseq);
     }
     
     public void setIdentity(CallBlast blaster)
@@ -212,6 +212,8 @@ public class  Gene implements Comparable <Gene> {
        }
        return s1;
     }
+
+   
  
 }
 
