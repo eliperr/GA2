@@ -41,9 +41,7 @@ public class  Person implements Comparable <Person> {
     // moved the translate work here to avoid code duplication
     public void translate()
     {
-         ArrayList<String> proteome=new ArrayList <>(); 
-             
-            proteome = Translate.translate(codingStrand);
+         ArrayList<String> proteome= Translate.translate(codingStrand);
 
              identity=0;
             for (int i=0; i< proteome.size(); i++)  //find best protein from proteome and keep aaseq and idendity from this
@@ -62,6 +60,7 @@ public class  Person implements Comparable <Person> {
     {
         identity = blaster.blast(aaseq);  //need to change this??!  need to recheck best aaseq
     }
+           //neither set identiy or set identities being used rn   new people always being made
     
     public void setIdentity(double d)
     {

@@ -22,7 +22,7 @@ public class Population {
         
     }
      
-     public Population( int num, int len )  //num = number of people in population, len=length of genes in nucleotides
+     public Population( int num, int len )  //num = number of people in population, len=length of nucleotide in gene
     {
         Person[] pop=new Person[num];
         
@@ -39,22 +39,23 @@ public class Population {
     }
      
      
-      public void setPersons( Person[] pop)
+    
+      public void setGenes( Person[] pop)
      {
         this.people=pop;
      }
      
-     public void setIdentities()
+     public void setIdentities()  //not to be confused with set identity in people class
      {
       
         BioJavaWrapper.blastAll(people);
      }
     
-     public Person[] getPerson()
+     public Person[] getGene()
     {
           return people;
     }
-     public Person getPerson( int i)
+     public Person getGene( int i)
     {
           return people[i];
     }
@@ -107,7 +108,7 @@ public class Population {
      //star trek class TNG 
      
      
-   public Person[] pickParents(int selectNum)
+   public Person[] pickParents(int selectNum) 
    {
        Arrays.sort(people); 
            //Person[]half= new Person[people.length/selectNum];
@@ -118,7 +119,7 @@ public class Population {
             // 0 to this number
            
            
-           int[] ranking = new int[range];
+           int[] ranking = new int[range];  
            int total = 0;
            
            for(int i = 0; i < ranking.length; i++)
@@ -130,7 +131,7 @@ public class Population {
            }
            
            double[] prob = new double[range];
-           for(int i = 0; i < prob.length; i++)
+           for(int i = 0; i < prob.length; i++)  
            {
                prob[i] = (double)ranking[i] / total;
            }
@@ -174,7 +175,7 @@ public class Population {
         //Person[] children = new Person[ (int) Math.floor(people.length/2/selectNum ) *selectNum *2]
           Person[] children = new Person[people.length];      
            
-          for(int i = 0; i < children.length; i++)
+          for(int i = 0; i < children.length; i++)  
           {
               
               
@@ -320,18 +321,19 @@ public class Population {
        
        double total = 0;
        
-       for(int i = 0; i < prob.length; i++)
+       for(int i = 0; i < prob.length; i++)  //thru all prob for each person    starting at highest prob
        {
-           total += prob[i];
+           total += prob[i];//adding up all probs from highest to lowest
            
            if(p < total)
            {
-               return i;
+               return i;   //eventually prob adds up to one so need to return a parent
+
            }
            
        }
        
-       return -1;
+       return -1;  //this should never happen?but need it so comp doesn't yell at you
    }
    
    // pick a parent but exclude the first parent from the selection
