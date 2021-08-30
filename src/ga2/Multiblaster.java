@@ -49,7 +49,7 @@ public class Multiblaster
     // a b c d e f g genes
     // 1 2 1 2 1 2 1
     
-    public static void blastAll(Gene[] genes)
+    public static void blastAll(Person[] genes)
     {
         if(active == null)
         {
@@ -57,7 +57,7 @@ public class Multiblaster
         }
         active.blastAllHelp(genes);
     }
-    private void blastAllHelp(Gene[] genes)
+    private void blastAllHelp(Person[] genes)
     {
         
         BlasterThread[] run = new BlasterThread[blasters.length];
@@ -103,10 +103,10 @@ public class Multiblaster
     class BlasterThread implements Runnable
     {
         private int thread_num;
-        private Gene[] genes;
+        private Person[] genes;
         private boolean finished;
         
-        public BlasterThread(int thread_num, Gene[] genes)
+        public BlasterThread(int thread_num, Person[] genes)
         {
             this.thread_num = thread_num;
             this.genes = genes;
