@@ -88,7 +88,7 @@ driver.findElement(By.linkText("urlLink")).sendKeys(selectLinkOpeninNewTab);
     // a b c d e f g genes
     // 1 2 1 2 1 2 1
     
-    public static void blastAll(Gene[] genes)
+    public static void blastAll(Person[] genes)
     {
         if(active == null)
         {
@@ -96,7 +96,7 @@ driver.findElement(By.linkText("urlLink")).sendKeys(selectLinkOpeninNewTab);
         }
         active.blastAllHelp(genes);
     }
-    private void blastAllHelp(Gene[] genes)
+    private void blastAllHelp(Person[] genes)
     {
         
         BlasterThread[] run = new BlasterThread[num_threads];
@@ -144,10 +144,10 @@ driver.findElement(By.linkText("urlLink")).sendKeys(selectLinkOpeninNewTab);
         final String target = ("MWADDAKKLCPDLLLAQVRESRGKANLTKYREASVEVMEIMSRFAVIERASIDEAYVDLTSAVQERLQKLQGQPISADLLPSTYIEGLPQGPTTAEETVQKEGMRKQGLFQWLDSLQIDNLTSPDLQLTVGAVIVEEMRAAIERETGFQCSAGISHNKVLAKLACGLNKPNRQTLVSHGSVPQLFSQMPIRKIRSLGGKLGASVIEILGIEYMGELTQFTESQLQSHFGEKNGSWLYAMCRGIEHDPVKPRQLPKTIGCSKNFPGKTALATREQVQWWLLQLAQELEERLTKDRNDNDRVATQLVVSIRVQGDKRLSSLRRCCALTRYDAHKMSHDAFTVIKNCNTSGIQTEWSPPLTMLFLCATKFSASAPSSSTDITSFLSSDPSSLPKVPVTSSEAKTQGSGPAVTATKKATTSLESFFQKAAERQKVKEASLSSLTAPTQAPMSNSPSKPSLPFQTSQSTGTEPFFKQKSLLLKQKQLNNSSVSSPQQNPWSNCKALPNSLPTEYPGCVPVCEGVSKLEESSKATPAEMDLAHNSQSMHASSASKSVLEVTQKATPNPSLLAAEDQVPCEKCGSLVPVWDMPEHMDYHFALELQKSFLQPHSSNPQVVSAVSHQGKRNPKSPLACTNKRPRPEGMQTLESFFKPLTH");
 
         private int thread_num;
-        private Gene[] genes;
+        private Person[] genes;
         private boolean finished;
         
-        public BlasterThread(int thread_num, Gene[] genes)
+        public BlasterThread(int thread_num, Person[] genes)
         {
             this.thread_num = thread_num;
             this.genes = genes;

@@ -49,6 +49,7 @@ public class  Person implements Comparable <Person> {
     {
         identity = blaster.blast(aaseq);  //need to change this??!  need to recheck best aaseq
     }
+           //neither set identiy or set identities being used rn   new people always being made
     
     public void setIdentity(double d)
     {

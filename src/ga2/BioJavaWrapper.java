@@ -50,9 +50,9 @@ public class BioJavaWrapper
     
     private static ProteinSequence targetProtein;
     
-    public static void blastAll(Gene[] genes)
+    public static void blastAll(Person[] genes)
     {
-        for(Gene g : genes)
+        for(Person g : genes)
         {
             g.setIdentity(blast(g.getAASeq()));
         }

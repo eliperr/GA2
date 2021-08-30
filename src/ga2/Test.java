@@ -16,9 +16,13 @@ public class Test {
      public static void main(String[] args) 
     {   //main method: test generations having children
         //Population test = new Population(20, 3135);
-        Population test = new Population(100, 5000);
+       Population test = new Population(50, 12000);
         test.setIdentities();
-        //test.printThePeople();
+        //test.printThePeople(); 
+        
+       
+        
+       
         
         for(int i = 0; i < 500; i++)
         {
@@ -27,6 +31,8 @@ public class Test {
             test.nextGen(1, 2);
             //test.replaceWorst(1, 2);
             test.printTheBestPerson();
+            
+            
         }
         
     

@@ -14,22 +14,22 @@ import java.util.List;
  * @author michael
  */
 public class Population {
-     private Gene[] people ;
+     private Person[] people ;
      
-     public Population(  Gene [] pop)
+     public Population(  Person [] pop)
     {
         people = pop;
         
     }
      
-     public Population( int num, int len )  //num = number of people in population, len=length of genes in nucleotides
+     public Population( int num, int len )  //num = number of people in population, len=length of nucleotide in gene
     {
-        Gene[] pop=new Gene[num];
+        Person[] pop=new Person[num];
         
         for (int i=0; i<num; i++)
             
         {
-            pop[i]=new Gene(len);
+            pop[i]=new Person(len);
             
         }
        this.people = pop;          
@@ -37,22 +37,22 @@ public class Population {
     }
      
      
-      public void setGenes( Gene[] pop)
+      public void setGenes( Person[] pop)
      {
         this.people=pop;
      }
      
-     public void setIdentities()
+     public void setIdentities()  //not to be confused with set identity in people class
      {
       
         BioJavaWrapper.blastAll(people);
      }
     
-     public Gene[] getGene()
+     public Person[] getGene()
     {
           return people;
     }
-     public Gene getGene( int i)
+     public Person getGene( int i)
     {
           return people[i];
     }
@@ -85,12 +85,12 @@ public class Population {
       }          
               
      
-   public  List<Gene> chooseParents()
+   public  List<Person> chooseParents()
    { 
-       List<Gene> genes=new ArrayList<>(); 
+       List<Person> genes=new ArrayList<>(); 
        
        
-     for ( Gene g: people)
+     for ( Person g: people)
      {   double n=Math.random();
        if (n<=0.5)
        {
@@ -105,15 +105,15 @@ public class Population {
      //star trek class TNG 
      
      
-   public Gene[] pickParents(int selectNum)
+   public Person[] pickParents(int selectNum) 
    {
        Arrays.sort(people); 
-           //Gene[]half= new Gene[people.length/selectNum];
+           //Gene[]half= new Person[people.length/selectNum];
            
            int range = people.length/selectNum; // 0 to this number
            
            
-           int[] ranking = new int[range];
+           int[] ranking = new int[range];  
            int total = 0;
            
            for(int i = 0; i < ranking.length; i++)
@@ -125,7 +125,7 @@ public class Population {
            }
            
            double[] prob = new double[range];
-           for(int i = 0; i < prob.length; i++)
+           for(int i = 0; i < prob.length; i++)  
            {
                prob[i] = (double)ranking[i] / total;
            }
@@ -133,10 +133,10 @@ public class Population {
 
         
         int p1_num = pickParent(prob);
-        Gene p1 = people[p1_num];
+        Person p1 = people[p1_num];
 
         int p2_num;
-        Gene p2;
+        Person p2;
 
         do
         {
@@ -146,30 +146,34 @@ public class Population {
 
         p2 = people[p2_num];
         
-        return new Gene[]{p1, p2};
+        return new Person[]{p1, p2};
    }
    
    public void nextGen( double mutRate, int selectNum )
     {
            Arrays.sort(people); 
-           //Gene[]half= new Gene[people.length/selectNum];
+           //Gene[]half= new Person[people.length/selectNum];   
            
-           int range = people.length/selectNum; // 0 to this number
+           int range = people.length/selectNum; // 0 to this number   ///range could be double?
            
            
-           int[] ranking = new int[range];
+           int[] ranking = new int[range]; //arr of num people selected?
+
            int total = 0;
            
-           for(int i = 0; i < ranking.length; i++)
+           for(int i = 0; i < ranking.length; i++)  //ranking.length is range, num people selected
            {
-               ranking[ranking.length-i-1] = i+1;
-               total += i+1;
+               ranking[ranking.length-i-1] = i+1;  //start at end of array (lowest), ranked 1,2, 3 etc  
+               total += i+1;  //  i:0 total: 1, i:1, total: 3, i:2 total:6, i:3 tot: 10 , 15, 21, 28, 36, 45,55 etc
            }
            
-           double[] prob = new double[range];
-           for(int i = 0; i < prob.length; i++)
+           double[] prob = new double[range];         //probability array for each person in range
+
+           for(int i = 0; i < prob.length; i++)  //highest num at start of ranking
            {
-               prob[i] = (double)ranking[i] / total;
+               prob[i] = (double)ranking[i] / total;  //probability is ranking/total for each person because easy to write 
+                        //(no special significance of numbers  lowest ranking: for 1 person: 1, 2 persons: 1/3,  3 persons 1/6   highest ranking for 10 persons: 10/55=2/11 for each mating     
+
            }
            
            //System.out.println(Arrays.toString(prob));
@@ -178,16 +182,16 @@ public class Population {
             
             
         
-        //Gene[] children = new Gene[ (int) Math.floor(people.length/2/selectNum ) *selectNum *2]
-          Gene[] children = new Gene[people.length];      
+        //Gene[] children = new Person[ (int) Math.floor(people.length/2/selectNum ) *selectNum *2]
+          Person[] children = new Person[people.length];      
            
-          for(int i = 0; i < children.length; i++)
+          for(int i = 0; i < children.length; i++)  
           {
-              int p1_num = pickParent(prob);
-              Gene p1 = people[p1_num];
+              int p1_num = pickParent(prob);  //promiscous genes, parents pair with any other parent for each child and may pair with a different partner for another child
+              Person p1 = people[p1_num];
               
               int p2_num;
-              Gene p2;
+              Person p2;
               
               do
               {
@@ -208,17 +212,17 @@ public class Population {
                //Gene p1=  people[i];
               //Gene p2=  people[i+1];
             
-              String mutp1=Gene.ptMut(p1,mutRate);
-              String mutp2=Gene.ptMut(p2,mutRate);
-               mutp1=Gene.del(mutp1,mutRate,1);
-              mutp2=Gene.del(mutp2,mutRate,1);
-              mutp1=Gene.dup(mutp1,mutRate,1);
-              mutp2=Gene.dup(mutp2,mutRate,1);
-              mutp1=Gene.insertion(mutp1,mutRate,1);
-              mutp2=Gene.insertion(mutp2,mutRate,1);
+              String mutp1=Person.ptMut(p1,mutRate);
+              String mutp2=Person.ptMut(p2,mutRate);
+               mutp1=Person.del(mutp1,mutRate,1);
+              mutp2=Person.del(mutp2,mutRate,1);
+              mutp1=Person.dup(mutp1,mutRate,1);
+              mutp2=Person.dup(mutp2,mutRate,1);
+              mutp1=Person.insertion(mutp1,mutRate,1);
+              mutp2=Person.insertion(mutp2,mutRate,1);
               
-              String child=Gene.crossover(mutp1, mutp2);
-                Gene kid=new Gene(child);
+              String child=Person.crossover(mutp1, mutp2);
+                Person kid=new Person(child);
                 
                 /*
                 System.out.println(p1_num+" and "+p2_num+" had a kid! Mazel tov!");
@@ -249,7 +253,7 @@ public class Population {
    public void nextGenPartialReplace( double mutRate, int selectNum )
     {
            Arrays.sort(people); 
-           //Gene[]half= new Gene[people.length/selectNum];
+           //Gene[]half= new Person[people.length/selectNum];
            
            int range = people.length/selectNum; // 0 to this number
            
@@ -275,8 +279,8 @@ public class Population {
             
             
         
-        //Gene[] children = new Gene[ (int) Math.floor(people.length/2/selectNum ) *selectNum *2]
-          Gene[] children = new Gene[people.length];      
+        //Gene[] children = new Person[ (int) Math.floor(people.length/2/selectNum ) *selectNum *2]
+          Person[] children = new Person[people.length];      
            
           
           for(int i = 0; i < children.length/selectNum; i++)
@@ -286,10 +290,10 @@ public class Population {
           for(int i = children.length/selectNum; i < children.length; i++)
           {
               int p1_num = pickParent(prob);
-              Gene p1 = people[p1_num];
+              Person p1 = people[p1_num];
               
               int p2_num;
-              Gene p2;
+              Person p2;
               
               do
               {
@@ -310,17 +314,17 @@ public class Population {
                //Gene p1=  people[i];
               //Gene p2=  people[i+1];
             
-              String mutp1=Gene.ptMut(p1,mutRate);
-              String mutp2=Gene.ptMut(p2,mutRate);
-               mutp1=Gene.del(mutp1,mutRate,1);
-              mutp2=Gene.del(mutp2,mutRate,1);
-              mutp1=Gene.dup(mutp1,mutRate,1);
-              mutp2=Gene.dup(mutp2,mutRate,1);
-              mutp1=Gene.insertion(mutp1,mutRate,1);
-              mutp2=Gene.insertion(mutp2,mutRate,1);
+              String mutp1=Person.ptMut(p1,mutRate);
+              String mutp2=Person.ptMut(p2,mutRate);
+               mutp1=Person.del(mutp1,mutRate,1);
+              mutp2=Person.del(mutp2,mutRate,1);
+              mutp1=Person.dup(mutp1,mutRate,1);
+              mutp2=Person.dup(mutp2,mutRate,1);
+              mutp1=Person.insertion(mutp1,mutRate,1);
+              mutp2=Person.insertion(mutp2,mutRate,1);
               
-              String child=Gene.crossover(mutp1, mutp2);
-                Gene kid=new Gene(child);
+              String child=Person.crossover(mutp1, mutp2);
+                Person kid=new Person(child);
                 
                 /*
                 System.out.println(p1_num+" and "+p2_num+" had a kid! Mazel tov!");
@@ -352,22 +356,22 @@ public class Population {
    {
        Arrays.sort(people);
        
-       Gene[] parents = pickParents(selectNum);
+       Person[] parents = pickParents(selectNum);
        
-       Gene p1 = parents[0];
-       Gene p2 = parents[1];
+       Person p1 = parents[0];
+       Person p2 = parents[1];
        
-       String mutp1=Gene.ptMut(p1,mutRate);
-        String mutp2=Gene.ptMut(p2,mutRate);
-         mutp1=Gene.del(mutp1,mutRate,1);
-        mutp2=Gene.del(mutp2,mutRate,1);
-        mutp1=Gene.dup(mutp1,mutRate,1);
-        mutp2=Gene.dup(mutp2,mutRate,1);
-        mutp1=Gene.insertion(mutp1,mutRate,1);
-        mutp2=Gene.insertion(mutp2,mutRate,1);
+       String mutp1=Person.ptMut(p1,mutRate);
+        String mutp2=Person.ptMut(p2,mutRate);
+         mutp1=Person.del(mutp1,mutRate,1);
+        mutp2=Person.del(mutp2,mutRate,1);
+        mutp1=Person.dup(mutp1,mutRate,1);
+        mutp2=Person.dup(mutp2,mutRate,1);
+        mutp1=Person.insertion(mutp1,mutRate,1);
+        mutp2=Person.insertion(mutp2,mutRate,1);
 
-        String child=Gene.crossover(mutp1, mutp2);
-          Gene kid=new Gene(child);
+        String child=Person.crossover(mutp1, mutp2);
+          Person kid=new Person(child);
           
           people[people.length-1] = kid;
           //kid.setIdentity(BioJavaWrapper.blast(kid.getAASeq()));
@@ -375,23 +379,24 @@ public class Population {
           Arrays.sort(people);
    }
    
-   public int pickParent(double[] prob)
-   {
+   public int pickParent(double[] prob)   //randomly choose parent (return index) with some persons having higher prob than others (using prob ranking system)
+   {  //not be confused with pickParents  
        double p = Math.random();
        
        double total = 0;
        
-       for(int i = 0; i < prob.length; i++)
+       for(int i = 0; i < prob.length; i++)  //thru all prob for each person    starting at highest prob
        {
-           total += prob[i];
+           total += prob[i];//adding up all probs from highest to lowest
            
            if(p < total)
            {
-               return i;
+               return i;   //eventually prob adds up to one so need to return a parent
+
            }
            
        }
        
-       return -1;
+       return -1;  //this should never happen?but need it so comp doesn't yell at you
    }
 }
