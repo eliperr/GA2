@@ -34,6 +34,7 @@ public class Population {
         }
        this.people = pop; 
        
+       MultiTranslate.translate(people);
        Arrays.sort(people);          
                 
     }
@@ -45,11 +46,14 @@ public class Population {
         this.people=pop;
      }
      
+      // don't use this because translate already goes to biojava
+      /*
      public void setIdentities()  //not to be confused with set identity in people class
      {
       
         BioJavaWrapper.blastAll(people);
      }
+      */
     
      public Person[] getGene()
     {
@@ -130,7 +134,7 @@ public class Population {
                total += i+1;
            }
            
-           double[] prob = new double[range];
+           prob = new double[range];
            for(int i = 0; i < prob.length; i++)  
            {
                prob[i] = (double)ranking[i] / total;
@@ -215,6 +219,8 @@ public class Population {
           
           
           people = children;
+          
+          MultiTranslate.translate(people);
            Arrays.sort(people);
     }  
    
@@ -300,6 +306,7 @@ public class Population {
           
           
           people = children;
+          MultiTranslate.translate(people, children.length/selectNum, people.length);
            Arrays.sort(people);
     }  
    
@@ -310,6 +317,8 @@ public class Population {
        
           
           people[people.length-1] = createChild(pickParents(selectNum), mutRate);
+          people[people.length-1].translate();
+          
           //kid.setIdentity(BioJavaWrapper.blast(kid.getAASeq()));
           
           Arrays.sort(people);

@@ -8,12 +8,21 @@ import java.util.Scanner;
   
 public class Translate {
   
+    private static Map<String, Character> codonTable;
+    
+    
 //Purpose: Translating from coding strand directionly into amino acid using mapped codon table
     //polycistronic mRNA--> translates multiple proteins per coding strand/mRNA
 
       //return arraylist of all proteins translated
   public static ArrayList<String> translate(String codingStrand)
   {
+      
+      if(codonTable == null)
+      {
+          readCodonTable();
+      }
+      
       String codingStrand2=codingStrand.replaceAll("\\s+","");
       
       //System.out.println(!codingStrand2.equals (""));
@@ -31,35 +40,7 @@ public class Translate {
           
         
        
-          File goodCodons = new File("goodCodons.txt"); //scanning codon table (goodCodons, text file) --> it is a good one! Thanks Michael! Yeah!
           
-          Scanner scnr = null;
-          try
-          {
-           scnr = new Scanner(goodCodons); //making a scanner to look at text of goodCodons
-          }
-          catch(IOException ex)
-          {
-              ex.printStackTrace(System.err);
-              System.exit(0);
-          }
-           Map<String, String> codonTable
-            = new HashMap<String, String>();
-           
-           int lineNumber = 1;
-           
-        while(scnr.hasNext()){
-            String codonLine = scnr.next();
-            String aaLine = scnr.next();
-            
-  
-        codonTable.put( codonLine, aaLine);  //went through all of goodCodons and mapped each codon to an amino acid, sometimes multiple occurences
-     
-          
-            lineNumber++;
-        }
-
-        //System.out.println(codonTable);
       
           
     int k=codingStrand2.indexOf("ATG")+3;  //find index, k to start translating amino acid at start codon ATG (AUG but DNA)
@@ -118,10 +99,49 @@ public class Translate {
   
  
     
-    //stop codons: UAA, UAG, UGA  --> TAA, TAG, TGA 
+    //stop codons: UAA, UAG, UGA  --> TAA, TAG, TGA
+  
+  
+  public static void readCodonTable()
+  {
+      File goodCodons = new File("goodCodons.txt"); //scanning codon table (goodCodons, text file) --> it is a good one! Thanks Michael! Yeah!
+          
+          Scanner scnr = null;
+          try
+          {
+           scnr = new Scanner(goodCodons); //making a scanner to look at text of goodCodons
+          }
+          catch(IOException ex)
+          {
+              ex.printStackTrace(System.err);
+              System.exit(0);
+          }
+           codonTable
+            = new HashMap<String, Character>();
+           
+           int lineNumber = 1;
+           
+        while(scnr.hasNext()){
+            String codonLine = scnr.next();
+            String aaLine = scnr.next();
+            
+  
+        codonTable.put( codonLine, aaLine.charAt(0));  //went through all of goodCodons and mapped each codon to an amino acid, sometimes multiple occurences
+     
+          
+            lineNumber++;
+        }
+
+        //System.out.println(codonTable);
+  }
 }
 //edges:  if no start codon --> don't go to blast --> asnswer is zero
 //what happens if no stop codon?  or start codon?
 //
 
 //1.edges, blast, random coding strands 
+
+
+
+
+

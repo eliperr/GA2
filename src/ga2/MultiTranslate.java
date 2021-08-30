@@ -15,12 +15,22 @@ public class MultiTranslate
     
     public static void translate(Person[] people)
     {
+        translate(people, 0, people.length);
+    }
+    
+    public static void translate(Person[] people, int start, int end)
+    {
+        if(!Person.WAIT_FOR_IDENTITY)
+        {
+            return;
+        }
+        
         if(active == null)
         {
             active = new MultiTranslate(4);
         }
         
-        active.translate_helper(people);
+        active.translate_helper(people, start, end);
     }
     
     
@@ -40,15 +50,16 @@ public class MultiTranslate
         }
     }
     
-    public void translate_helper(Person[] people)
+    public void translate_helper(Person[] people, int start, int end)
     {
         for(MultiTranslateThread t : threads)
         {
-            t.setPeople(people);
+            t.setPeople(people, start, end);
         }
         
-        for(Thread t : threads)
+        for(MultiTranslateThread r : threads)
         {
+            Thread t = new Thread(r);
             t.start();
         }
         
@@ -77,12 +88,13 @@ public class MultiTranslate
     }
     
     
-    class MultiTranslateThread extends Thread
+    class MultiTranslateThread implements Runnable
     {
         private int offset;
         private boolean finished;
         private int num_threads;
         private Person[] people;
+        private int start, end;
         
         public MultiTranslateThread(int offset, int num_threads)
         {
@@ -90,9 +102,11 @@ public class MultiTranslate
             this.num_threads = num_threads;
         }
         
-        public void setPeople(Person[] people)
+        public void setPeople(Person[] people, int start, int end)
         {
             this.people = people;
+            this.start = start;
+            this.end = end;
         }
         
         public boolean isFinished()
@@ -104,7 +118,7 @@ public class MultiTranslate
         {
             finished = false;
             
-            for(int i = offset; i < people.length; i += num_threads)
+            for(int i = start+offset; i < end; i += num_threads)
             {
                 people[i].translate();
             }
