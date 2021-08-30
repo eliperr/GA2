@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class  Person implements Comparable <Person> {
     
 
+    public static final boolean WAIT_FOR_IDENTITY = true;
     
     private String codingStrand;
     //private ArrayList<String> proteome;
@@ -26,23 +27,35 @@ public class  Person implements Comparable <Person> {
     public Person(String coding)
     {
         this.codingStrand = coding;
-        ArrayList<String> proteome=new ArrayList <>(); 
+       
         
-        proteome = Translate.translate(codingStrand);
         
-         identity=0;
-        for (int i=0; i< proteome.size(); i++)  //find best protein from proteome and keep aaseq and idendity from this
+        if(!WAIT_FOR_IDENTITY) // only translate on creation if we're not multithreading
         {
-            
-            double id= BioJavaWrapper.blast(proteome.get(i));
-            if (id>=identity)
-            { identity=id; 
-            aaseq=proteome.get(i);
-            }     
-            
-        }    
+             translate();
+        }
             
      
+    }
+    
+    // moved the translate work here to avoid code duplication
+    public void translate()
+    {
+         ArrayList<String> proteome=new ArrayList <>(); 
+             
+            proteome = Translate.translate(codingStrand);
+
+             identity=0;
+            for (int i=0; i< proteome.size(); i++)  //find best protein from proteome and keep aaseq and idendity from this
+            {
+
+                double id= BioJavaWrapper.blast(proteome.get(i));
+                if (id>=identity)
+                { identity=id; 
+                aaseq=proteome.get(i);
+                }     
+
+            }   
     }
     
     public void setIdentity(CallBlast blaster)
