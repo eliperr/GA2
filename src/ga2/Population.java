@@ -82,14 +82,63 @@ public class Population {
       public void printTheBestPerson ( ) 
       {
           
-        Arrays.sort(people);
+        //Arrays.sort(people);
         
            System.out.println(people[0].getAASeq());
-         System.out.println(people[0].getIdentity());
+         System.out.println("best person is  "+ people[0].getIdentity());
           
         
           
-      }          
+      }   
+      
+      public void printTheMeanPerson ( ) 
+      {
+          
+   
+          
+         double sum=0;
+         
+        for (Person p: people)
+        {
+            
+            sum=sum+p.getIdentity();
+            
+        }   
+        double mean=sum/people.length; 
+        
+        System.out.println("mean is " + mean);
+          
+      } 
+      
+      
+       public void printTheSTDPerson ( ) 
+      {
+          
+   
+          
+         double first=0;
+         double second=0;
+         
+        for (Person p: people)
+        {
+            
+            first=first+p.getIdentity()*p.getIdentity();
+            second=second+p.getIdentity();
+            
+        }   
+        
+        first=first/people.length;
+        second=second/people.length;
+        double std= Math.sqrt( first-second*second);
+        
+         System.out.println("STD is " + std);
+          
+      } 
+      
+      
+      
+       
+       
               
      
    public  List<Person> chooseParents()
@@ -114,7 +163,7 @@ public class Population {
      
    public Person[] pickParents(int selectNum) 
    {
-       Arrays.sort(people); 
+       //Arrays.sort(people); 
            //Person[]half= new Person[people.length/selectNum];
         int range = people.length/selectNum;
         

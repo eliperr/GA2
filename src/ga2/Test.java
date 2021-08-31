@@ -5,6 +5,8 @@
  */
 package ga2;
 
+import java.util.Arrays;
+
 /**
  *
  * @author michael
@@ -18,10 +20,10 @@ public class Test {
         //Population test = new Population(20, 3135);
        Population test = new Population(50, 12000);
         //test.setIdentities(); // don't use this because translate already goes to biojava
-        //test.printThePeople(); 
         
        
-        
+         //System.out.println(Arrays.stream(test.getGene()).mapToDouble(Person::getIdentity) .average());
+         
        
         
         for(int i = 0; i < 500; i++)
@@ -31,7 +33,8 @@ public class Test {
             test.nextGen(1, 2);
             //test.replaceWorst(1, 2);
             test.printTheBestPerson();
-            
+             test.printTheMeanPerson(); 
+             test.printTheSTDPerson(); 
             
         }
         
