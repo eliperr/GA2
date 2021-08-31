@@ -18,7 +18,7 @@ public class Test {
      public static void main(String[] args) 
     {   //main method: test generations having children
         //Population test = new Population(20, 3135);
-       Population test = new Population(50, 12000);
+       Population test = new Population(300, 12000);
         //test.setIdentities(); // don't use this because translate already goes to biojava
         
        
