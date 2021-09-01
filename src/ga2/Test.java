@@ -18,14 +18,12 @@ public class Test {
      public static void main(String[] args) 
     {   //main method: test generations having children
         //Population test = new Population(20, 3135);
-       Population test = new Population(300, 12000);
-        //test.setIdentities(); // don't use this because translate already goes to biojava
+        Population test = new Population(300, 12000);
         
        
-         //System.out.println(Arrays.stream(test.getGene()).mapToDouble(Person::getIdentity) .average());
          
        
-        
+       
         for(int i = 0; i < 500; i++)
         {
             System.out.println("***** GENERATION "+i);
@@ -39,6 +37,24 @@ public class Test {
         }
         
     
+        
+        
+        
+        //test biojava local alignment 
+        
+        //System.out.println ( "bad aaseq: " + BioJavaWrapper.blast("oubzxj")); 
+        //System.out.println ( "lower case: " + BioJavaWrapper.blast(CallBlast.target.toLowerCase()));
+        //System.out.println ( "half target: " + BioJavaWrapper.blast(CallBlast.target.substring(0,CallBlast.target.length()/2)));
+        //System.out.println ( "inverted half target: " + BioJavaWrapper.blast(CallBlast.target.substring(CallBlast.target.length()/2,CallBlast.target.length()) + CallBlast.target.substring(0,CallBlast.target.length()/2) ));
+     /*System.out.println ( "The target idendity: " + BioJavaWrapper.blast(CallBlast.target)); //should be 1
+      System.out.println ("evolved aaseq test: " + BioJavaWrapper.blast( "MVPRIAAAYVYVERPTTRNWNLALLRFVHVLLVAFANVNGRGDKMTSIRGTDYRVWPELADSMKWVLLRHRTHGRYKIGDLGCPKVEPCLSLGNLGTLGRLGVVKFSMDLTILRTSHCLKTKMTFTIITDRQRKQGRNILSCGLNKPTSPVGFESPSRGKFCGVIKVSAHYTSNLLVITAPHYLWTEQRNVPSTVEWRRRFFLVLSVGGWDILGSSSSRGSSFTFCNCTLRASHVGSPQRNTTELVQLILVYKNRLEQLCQLWVTCTSWSPHGIILRLCSSTGDNHRAALTQAVNPRKDRLTLGTLSPRLCNECYTGCQFFVRIAKTLEMRWTIVGDLSRMVVIRTALDVKYRTWSIIDLVVISIRTNVFFIIVYQNLLIRRVCCSDIPRSPDVKHFVEIDRPMGVARNKPERYYTLSTASHIDSGNLSVNKNGHWMLGKSGWQFLALAITFLAKEGIGRLGRDSVYGYCVIDVRCLKRSKSGRSLQLCKVDHSPSYKRPEMRLGSSEAGDMGEDNGAPQLIGRAWELNRLITLSEVAKESCTCIIANLFTIQTMTSPLSIHVRGLDMRQRRPLMIYDRKTRGHGATVKQSNRALRTPRPLSALQSRSPADGVPSAHWYEIEARYCPQRGLSITLSRIAQSGPRTVRMCIILSRSAQIVSYWGNLSVVELIPQSSPDVFSRRRNNFNFKCHKVRTLQCSCAASEFLSVCPWYRFDDVADNFSQQFTGCSHHHGRNVWEQLVTPRTSTLKKFSIIRESLRVIKSLHRREPHVQDIRTPQFCVIERERAQDGRIRDTSNPRPSYVEAKTGVADYLVQSYTMCKGCCPSIRCAQDAFSFSMRHEQGQRLHFRLTPELGSGPNPSVYARMKNRCRWTNRVTVYTKLIYIHQVASKPGGLNFRRRLSSGLKSVRPAPSYFPLESFRIMFRSAGRMHLSLNIRNGHCSRPGICASPCSLPWFTNQKGACKAQPNPARSTMMSYTRHKFSLQIHMVTSSMHREGRCELLRHGQGQGCLGAFSWRLWEANLIVGILVLTQISLVYEHFVGYELFDNNGMHFEDPRWKRWKSRGTPRAIVLGEVGEAGRLRSADCVGILESPAGEKPIRTGGVRLGDRINAGDGPTRLRTPPRRLLDIVITFYLSCRYSNPCYPYSRKAINHTHDSKRKVVPPYTRTPLVISIYTMYSNPIPCRSQANHAKHGVHQMKMTKMTLAPGKTSSLTKGAATVKTNRRLPTPPYLFIVYSCQFISAGTQSPSRPSSETYYRFWPATKLLLNSVMFSSRCHGTYMLIEAYFLKVQLRPTRHPHGNSEGQLGLRTRLGSTCQRLRFEIFTSGYLWPESSQITEITTRTVRGGNNTWDCHQGFAVPAATGVLVFLSHCIRVNIPLARGLARARLPISGPFGSRSVLGLDSTQS"));
+      System.out.println ("diff size but same local alignment " + BioJavaWrapper.blast(CallBlast.target + "APRN")); //should still be 1 for local alignment
+      System.out.println ("2 X target  " + BioJavaWrapper.blast(CallBlast.target + CallBlast.target)); //should still be 1 for local alignment
+      System.out.println ("3 X target  " + BioJavaWrapper.blast(CallBlast.target + CallBlast.target + CallBlast.target));
+      System.out.println ("string insertion in middle " +  BioJavaWrapper.blast(CallBlast.target.substring (0,50) + "APRNGGGGGGHHHHHLLLLLLLL"+  CallBlast.target.substring(50,CallBlast.target.length())));  //should be less than 1
+      */  //System.out.println(Arrays.stream(test.getGene()).mapToDouble(Person::getIdentity) .average());
+        
+        
         
          /*double mutRate=1.9;
         int mut= (int) Math.floor(mutRate); 
@@ -60,3 +76,6 @@ public class Test {
         */
     }
 }
+
+
+//callblast.target   //break  //simil and idend.  package    global alignment
