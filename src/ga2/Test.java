@@ -19,21 +19,28 @@ public class Test {
     {   //main method: test generations having children
         //Population test = new Population(20, 3135);
         Population test = new Population(300, 12000);
+        int gen=500;
         
+       double[] best = new double [gen] ; //keep track of to determine plateau
+       double[] mean = new double [gen] ;
+        double[] std = new double [gen] ;
+        
+        
+         int prev=0;
        
-         
        
-       
-        for(int i = 0; i < 500; i++)
+        for(int i = 0; i < gen; i++)
         {
             System.out.println("***** GENERATION "+i);
             //test.nextGenPartialReplace(1,2);  //1 is mutation rate, 2 is selectNum 
             test.nextGen(1, 2);
             //test.replaceWorst(1, 2);
-            test.printTheBestPerson();
-             test.printTheMeanPerson(); 
-             test.printTheSTDPerson(); 
-            
+             best[i]=test.printTheBestPerson();
+             mean[i]=test.printTheMeanPerson(); 
+             std[i]=test.printTheSTDPerson(); 
+             printPlateau("best", best,i);
+             printPlateau("mean", mean,i);
+            printPlateau("std", std,i);
         }
         
     
@@ -75,6 +82,24 @@ public class Test {
         p.printThePeople();
         */
     }
+    public static void printPlateau (String val, double[] vals, int i )   
+    {
+        
+      
+             if (i>=50)  //test plateau      arbitratry numbers 
+             { int prev=i-50;
+                 if ( vals[i]<=vals[prev] + 0.001  && vals[i]>=vals[prev] -0.001 )  //if pretty much the same over 50 generations probably plateauted
+                 { 
+                 System.out.println( val +  "plateau from gen " + prev + "to" + i + " is " + vals[i]); 
+                 }
+                 
+             }      
+                   
+        
+        
+    }        
+                     
+     
 }
 
 
