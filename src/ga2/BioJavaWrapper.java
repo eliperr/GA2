@@ -91,7 +91,11 @@ public class BioJavaWrapper
         PairwiseSequenceAligner<ProteinSequence, AminoAcidCompound> smithWaterman =
                         Alignments.getPairwiseAligner(s1, s2, Alignments.PairwiseSequenceAlignerType.LOCAL, penalty, matrix);
 
+        /*
         SequencePair<ProteinSequence, AminoAcidCompound> pair = smithWaterman.getPair();
         return pair.getPercentageOfIdentity(true);
+        */
+        
+        return smithWaterman.getSimilarity();
     }
 }
