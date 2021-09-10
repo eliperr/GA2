@@ -71,7 +71,8 @@ public class BioJavaWrapper
         {
             ProteinSequence given = new ProteinSequence(aaseq);
             
-            return active.getAlignment(given, targetProtein) * Math.min(aaseq.length(), CallBlast.target.length()) / Math.max(aaseq.length(), CallBlast.target.length());
+            //return active.getAlignment(given, targetProtein) * Math.min(aaseq.length(), CallBlast.target.length()) / Math.max(aaseq.length(), CallBlast.target.length());
+            return active.getAlignment(given, targetProtein);
         }
         catch(CompoundNotFoundException ex)
         {
@@ -93,9 +94,9 @@ public class BioJavaWrapper
 
         
         SequencePair<ProteinSequence, AminoAcidCompound> pair = smithWaterman.getPair();
-        return pair.getNumIdenticals() / pair.getLength();
+        //eturn pair.getNumIdenticals() / pair.getLength();
         
         
-        //return smithWaterman.getSimilarity();
+        return smithWaterman.getSimilarity();
     }
 }
