@@ -16,7 +16,13 @@ public class Test {
     
     
      public static void main(String[] args) 
-    {   //main method: test generations having children
+    {   
+       /* 
+        System.out.println(BioJavaWrapper.blast(CallBlast.target.substring(100)));
+        
+        System.exit(0);
+        
+        //main method: test generations having children
         //Population test = new Population(20, 3135);
         Population test = new Population(300, 12000);
         int gen=500;
@@ -26,29 +32,32 @@ public class Test {
         double[] std = new double [gen] ;
         
         
-         int prev=0;
+         int prev=0;*/
        
-       
+       /*
         for(int i = 0; i < gen; i++)
         {
             System.out.println("***** GENERATION "+i);
             //test.nextGenPartialReplace(1,2);  //1 is mutation rate, 2 is selectNum 
             test.nextGen(1, 2);
             //test.replaceWorst(1, 2);
-             best[i]=test.printTheBestPerson();
-             mean[i]=test.printTheMeanPerson(); 
-             std[i]=test.printTheSTDPerson(); 
+             //best[i]=test.printTheBestPerson();
+             //mean[i]=test.printTheMeanPerson(); 
+             //std[i]=test.printTheSTDPerson(); 
              printPlateau("best", best,i);
              printPlateau("mean", mean,i);
             printPlateau("std", std,i);
         }
         
-    
+    */
         
         
         
         //test biojava local alignment 
-        
+        //System.out.println ( "replace gly with trp: " + BioJavaWrapper.blast(CallBlast.target.replaceAll("G","W")));
+        //System.out.println ( "replace trp with gly: " + BioJavaWrapper.blast(CallBlast.target.replaceAll("W","G")));
+        //System.out.println ( "replace ala with trp: " + BioJavaWrapper.blast(CallBlast.target.replaceAll("A","W")));
+        // System.out.println ( "replace trp with ala: " + BioJavaWrapper.blast(CallBlast.target.replaceAll("W","A")));
         //System.out.println ( "bad aaseq: " + BioJavaWrapper.blast("oubzxj")); 
         //System.out.println ( "lower case: " + BioJavaWrapper.blast(CallBlast.target.toLowerCase()));
         //System.out.println ( "half target: " + BioJavaWrapper.blast(CallBlast.target.substring(0,CallBlast.target.length()/2)));
