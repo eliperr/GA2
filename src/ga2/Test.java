@@ -25,7 +25,7 @@ public class Test {
         //main method: test generations having children
         //Population test = new Population(20, 3135);
         Population test = new Population(300, 12000);
-        int gen=2;
+        int gen=500;
         
        double[] best = new double [gen] ; //keep track of to determine plateau
        double[] mean = new double [gen] ;
@@ -34,24 +34,27 @@ public class Test {
         
          int prev=0;
        
+       test.printThePeople();
+       test.printTheBestPerson();
        
         for(int i = 0; i < gen; i++)
         {
-            test.printThePeople();
+            //test.printThePeople();
             System.out.println("***** GENERATION "+i);
             //test.nextGenPartialReplace(1,2);  //1 is mutation rate, 2 is selectNum 
             test.nextGen(1, 2);
             
             //test.replaceWorst(1, 2);
-             //best[i]=test.printTheBestPerson();
-             //mean[i]=test.printTheMeanPerson(); 
-             //std[i]=test.printTheSTDPerson(); 
+             best[i]=test.getTheBestPerson();
+             mean[i]=test.printTheMeanPerson(); 
+             std[i]=test.printTheSTDPerson(); 
              printPlateau("best", best,i);
              printPlateau("mean", mean,i);
             printPlateau("std", std,i);
         }
         
-    
+        test.printThePeople();
+        test.printTheBestPerson();
         
         /*
         System.out.println ( "trp: " + BioJavaWrapper.blast("WWWWA", "WWWWW"));

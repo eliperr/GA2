@@ -87,11 +87,22 @@ public class Population {
            System.out.println(people[0].getAASeq());
          System.out.println("best person is  "+ people[0].getIdentity());
           
-        
+ 
           
-      }   
+      }  
+      public double getTheBestPerson ( ) 
+      {
+          
+        //Arrays.sort(people);
+        
+          // System.out.println(people[0].getAASeq());
+         //System.out.println("best person is  "+ people[0].getIdentity());
+          
+        return people[0].getIdentity();
+          
+      }  
       
-      public void printTheMeanPerson ( ) 
+      public double printTheMeanPerson ( ) 
       {
           
    
@@ -106,12 +117,12 @@ public class Population {
         }   
         double mean=sum/people.length; 
         
-        System.out.println("mean is " + mean);
-          
+        //System.out.println("mean is " + mean);
+          return mean;
       } 
       
       
-       public void printTheSTDPerson ( ) 
+       public double printTheSTDPerson ( ) 
       {
           
    
@@ -131,8 +142,8 @@ public class Population {
         second=second/people.length;
         double std= Math.sqrt( first-second*second);
         
-         System.out.println("STD is " + std);
-          
+        // System.out.println("STD is " + std);
+          return std;
       } 
       
       
