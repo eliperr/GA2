@@ -87,7 +87,7 @@ public class Translate {
        { // System.out.println("break");
     
     break; 
-      } ///wont still be in while outer loop?
+      } //discontinue while loop
      
     //System.out.println(aaseq);
    

@@ -15,6 +15,9 @@ import java.util.List;
  */
 public class Population {
      private Person[] people ;
+     /*private double[] best ; //keep track of to determine plateau
+     private double [] mean;
+     private double [] STD;*/
      
      public Population(  Person [] pop)
     {
@@ -79,19 +82,22 @@ public class Population {
              
      }  
       
-      public void printTheBestPerson ( ) 
+      public double printTheBestPerson ( ) 
       {
           
         //Arrays.sort(people);
         
            System.out.println(people[0].getAASeq());
-         System.out.println("best person is  "+ people[0].getIdentity());
+           double best=people[0].getIdentity();
+         System.out.println("best person is  "+ best);
+         
+         return best;
           
         
           
       }   
       
-      public void printTheMeanPerson ( ) 
+      public double printTheMeanPerson ( ) 
       {
           
    
@@ -107,11 +113,12 @@ public class Population {
         double mean=sum/people.length; 
         
         System.out.println("mean is " + mean);
+        return mean;
           
       } 
       
       
-       public void printTheSTDPerson ( ) 
+       public double printTheSTDPerson ( ) 
       {
           
    
@@ -125,6 +132,8 @@ public class Population {
             first=first+p.getIdentity()*p.getIdentity();
             second=second+p.getIdentity();
             
+            
+            
         }   
         
         first=first/people.length;
@@ -132,14 +141,11 @@ public class Population {
         double std= Math.sqrt( first-second*second);
         
          System.out.println("STD is " + std);
+         return std;
           
       } 
       
-      
-      
-       
-       
-              
+            
      
    public  List<Person> chooseParents()
    { 

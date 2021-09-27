@@ -71,8 +71,11 @@ public class BioJavaWrapper
         {
             ProteinSequence given = new ProteinSequence(aaseq);
             
-            //return active.getAlignment(given, targetProtein) * Math.min(aaseq.length(), CallBlast.target.length()) / Math.max(aaseq.length(), CallBlast.target.length());
-            return active.getAlignment(given, targetProtein);
+            //return active.getpid(given, targetProtein) * Math.min(aaseq.length(), CallBlast.target.length()) / Math.max(aaseq.length(), CallBlast.target.length());
+            
+           
+           return active.getpid(given, targetProtein);
+            
         }
         catch(CompoundNotFoundException ex)
         {
@@ -90,13 +93,28 @@ public class BioJavaWrapper
     public double getAlignment(ProteinSequence s1, ProteinSequence s2)
     {
         PairwiseSequenceAligner<ProteinSequence, AminoAcidCompound> smithWaterman =
-                        Alignments.getPairwiseAligner(s1, s2, Alignments.PairwiseSequenceAlignerType.LOCAL, penalty, matrix);
+                        Alignments.getPairwiseAligner(s1, s2, Alignments.PairwiseSequenceAlignerType.GLOBAL, penalty, matrix);
+
+        
+        SequencePair<ProteinSequence, AminoAcidCompound> pair = smithWaterman.getPair();
+        //return pair.getNumIdenticals() / pair.getLength();
+        
+        
+        return smithWaterman.getSimilarity();
+    }
+    //test
+    public double getpid(ProteinSequence s1, ProteinSequence s2)
+    {
+        PairwiseSequenceAligner<ProteinSequence, AminoAcidCompound> smithWaterman =
+                        Alignments.getPairwiseAligner(s1, s2, Alignments.PairwiseSequenceAlignerType.GLOBAL, penalty, matrix);
 
         
         SequencePair<ProteinSequence, AminoAcidCompound> pair = smithWaterman.getPair();
         //eturn pair.getNumIdenticals() / pair.getLength();
         
         
-        return smithWaterman.getSimilarity();
+        return pair. getPercentageOfIdentity(true);
     }
+    
+    
 }

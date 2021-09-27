@@ -47,12 +47,19 @@ public class  Person implements Comparable <Person> {
             for (int i=0; i< proteome.size(); i++)  //find best protein from proteome and keep aaseq and idendity from this
             {
 
-                double id= BioJavaWrapper.blast(proteome.get(i));
+               double id= BioJavaWrapper.blast(proteome.get(i));
                 if (id>=identity)
                 { identity=id; 
                 aaseq=proteome.get(i);
                 }     
-
+                
+               /* 
+                double id= DumbAlignment.dumbBlast(CallBlast.target, proteome.get(i));
+                if (id>=identity)
+                { identity=id; 
+                aaseq=proteome.get(i);
+                }     
+               */
             }   
     }
     
