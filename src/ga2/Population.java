@@ -93,9 +93,20 @@ public class Population {
          
          return best;
           
-        
+ 
           
-      }   
+      }  
+      public double getTheBestPerson ( ) 
+      {
+          
+        //Arrays.sort(people);
+        
+          // System.out.println(people[0].getAASeq());
+         //System.out.println("best person is  "+ people[0].getIdentity());
+          
+        return people[0].getIdentity();
+          
+      }  
       
       public double printTheMeanPerson ( ) 
       {

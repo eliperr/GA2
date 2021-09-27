@@ -39,6 +39,7 @@ public class Test {
        
         for(int i = 0; i < gen; i++)
         {
+            //test.printThePeople();
             System.out.println("***** GENERATION "+i);
             //test.nextGenPartialReplace(1,2);  //1 is mutation rate, 2 is selectNum 
             test.nextGen(1, 2);
@@ -53,10 +54,14 @@ public class Test {
             printPlateau("std", std,i);*/
         }
         
-    
+        test.printThePeople();
+        test.printTheBestPerson();
         
-        
-        
+        /*
+        System.out.println ( "trp: " + BioJavaWrapper.blast("WWWWA", "WWWWW"));
+        System.out.println ( "gly: " + BioJavaWrapper.blast("GGGGA", "GGGGG"));
+        System.out.println ( "gly: " + BioJavaWrapper.blast("PPPPA", "PPPPP"));
+        System.out.println ( "p: " + BioJavaWrapper.blast("PPPPP", "PPPPA"));
         //test biojava local alignment 
         
         /*System.out.println ( "bad aaseq: " + BioJavaWrapper.blast("oubzxj")); 

@@ -87,6 +87,34 @@ public class BioJavaWrapper
         
     }
     
+    
+    public static double blast(String aaseq, String aaseq2)
+    {
+        if(aaseq.length() == 0)
+        {
+            return 0;
+        }
+        
+
+        
+        try
+        {
+            ProteinSequence given = new ProteinSequence(aaseq);
+            ProteinSequence given2 = new ProteinSequence(aaseq2);
+            
+            //return active.getAlignment(given, targetProtein) * Math.min(aaseq.length(), CallBlast.target.length()) / Math.max(aaseq.length(), CallBlast.target.length());
+            return active.getAlignment(given, given2);
+        }
+        catch(CompoundNotFoundException ex)
+        {
+            ex.printStackTrace(System.err);
+            System.exit(0);
+            return 0;
+        }
+                    
+        
+    }
+    
     private SubstitutionMatrix<AminoAcidCompound> matrix;
     private GapPenalty penalty;
     
